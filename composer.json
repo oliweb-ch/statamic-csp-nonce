@@ -1,0 +1,49 @@
+{
+    "name": "oliweb/statamic-csp-nonce",
+    "description": "Statamic addon that preserves CSP nonces through static caching (half/application driver)",
+    "type": "statamic-addon",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Olivier",
+            "homepage": "https://oliweb.ch"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "statamic/cms": "^6"
+    },
+    "require-dev": {
+        "pestphp/pest": "^3",
+        "orchestra/testbench": "^10.8|^11.0",
+        "statamic/cms": "^6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Oliweb\\StatamicCspNonce\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Oliweb\\StatamicCspNonce\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "statamic": {
+            "name": "CSP Nonce for Static Cache",
+            "description": "Preserves CSP nonces through Statamic's half static cache by swapping them for a placeholder before storage and reinserting the fresh nonce on each response."
+        },
+        "laravel": {
+            "providers": [
+                "Oliweb\\StatamicCspNonce\\ServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
