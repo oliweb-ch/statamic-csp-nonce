@@ -1,6 +1,6 @@
 # Statamic CSP Nonce
 
-[![Tests](https://github.com/oliweb/statamic-csp-nonce/actions/workflows/tests.yml/badge.svg)](https://github.com/oliweb/statamic-csp-nonce/actions/workflows/tests.yml)
+[![Tests](https://github.com/oliweb-ch/statamic-csp-nonce/actions/workflows/tests.yml/badge.svg)](https://github.com/oliweb-ch/statamic-csp-nonce/actions/workflows/tests.yml)
 
 A Statamic addon that preserves Content Security Policy (CSP) nonces through the static cache (half/application driver).
 
