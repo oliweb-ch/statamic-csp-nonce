@@ -79,6 +79,25 @@ test('does nothing in replaceInCachedResponse when no nonce is shared', function
     expect($response->getContent())->toBe($html);
 });
 
+test('replaces json-encoded nonce (slash escaped by json_encode) before caching', function () {
+    $nonce = 'abc/def+xyz=';
+    view()->share('csp_nonce', $nonce);
+
+    // json_encode échappe / en \/ par défaut (sans JSON_UNESCAPED_SLASHES)
+    $jsonEscaped = 'abc\/def+xyz=';
+    $html = '<script nonce="'.$nonce.'"></script>'
+        .'<div data-page="'.json_encode(['nonce' => $nonce]).'"></div>';
+
+    $response = new Response($html);
+
+    (new CspNonceReplacer())->prepareResponseToCache($response, new Response($html));
+
+    expect($response->getContent())
+        ->not->toContain($nonce)
+        ->not->toContain($jsonEscaped)
+        ->toContain('STATAMIC_CSP_NONCE');
+});
+
 test('service provider registers replacer in statamic config', function () {
     $replacers = config('statamic.static_caching.replacers', []);
 

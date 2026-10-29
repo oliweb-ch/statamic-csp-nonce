@@ -18,7 +18,11 @@ class CspNonceReplacer implements Replacer
         }
 
         $response->setContent(
-            str_replace($nonce, self::PLACEHOLDER, $response->getContent())
+            str_replace(
+                [$nonce, str_replace('/', '\\/', $nonce)],
+                [self::PLACEHOLDER, self::PLACEHOLDER],
+                $response->getContent()
+            )
         );
     }
 
